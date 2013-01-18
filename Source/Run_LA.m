@@ -379,7 +379,8 @@ if TT.findLyr
         wtrT = wtr(j,:);
         % test shallowest depth with deepest depth (exclude NaNs)
         wtrT = wtrT(~isnan(wtrT));
-        if abs(wtrT(1)-wtrT(end)) > Tdiff % not mixed... % GIVES mixed if NaN!!!!
+        
+        if ~isempty(wtrT) && abs(wtrT(1)-wtrT(end)) > Tdiff % not mixed... % GIVES mixed if NaN!!!!
             % remove NaNs, need at least 3 values
                 rhoT = rho(j,:); 
                 depT = depthAry; depT(isnan(rhoT)) = [];
@@ -930,7 +931,7 @@ if TT.wrt_ST1
             AvHyp_rho = layerDensity(SthermoD(j),Zm,wtrT,depT,...
                 bthA,bthD(j,:),salT);
         else
-            A = interp1(bthD(j,:),bthA,SthermoD(j));
+            A = interp1(bthD,bthA,SthermoD(j));
             L = 2*sqrt(A/pi);
             AvEpi_rho = layerDensity(0,SthermoD(j),wtrT,depT,...
                 bthA,bthD,salT);
