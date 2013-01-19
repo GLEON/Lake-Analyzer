@@ -21,7 +21,8 @@ for k = 1:length(fNms)
             elseif ishandle(tempT)
                 set(tempT,'String',...
                     plotTable.(char(fNms{k})).(char(axFields{i})),...
-                    'FontName','Arial','FontSize',12)
+                    'FontName',plotTable.(char(fNms{k})).FontName,...
+                	'FontSize',plotTable.(char(fNms{k})).FontSize)
             else
                 set(gca,axFields{i},plotTable.(char(fNms{k})).(char(axFields{i})))
             end
@@ -50,7 +51,8 @@ if writeTable.wTemp
                 set(gca,axFields{i},plotTable.wTemp.(char(axFields{i})))
             elseif ishandle(tempT)
                 set(tempT,'String',plotTable.wTemp.(char(axFields{i})),...
-                    'FontName','Arial','FontSize',12)
+                    'FontName',plotTable.(char(fNms{k})).FontName,...
+                	'FontSize',plotTable.(char(fNms{k})).FontSize)
             else
                 set(gca,axFields{i},plotTable.wTemp.(char(axFields{i})))
             end
@@ -59,7 +61,9 @@ if writeTable.wTemp
     contRange = get(gca,'CLim');
     contourf(dates,depthAry,wTemp',contRange(1):.5:contRange(2),...
         'Parent',gca,'LineStyle','none'); datetick
-    colorbar
+    cl = colorbar;
+    set(cl,'FontName',plotTable.(char(fNms{k})).FontName,...
+        'FontSize',plotTable.(char(fNms{k})).FontSize);
     set(gca,'XLim',[min(dates) max(dates)]);
     print(plotTable.PrintD.format,plotTable.PrintD.res,...
             [Year '/' LakeName '_wTemp'])

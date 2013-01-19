@@ -37,10 +37,20 @@ end
 
 fprintf('...completed\n\n') ;
 
-fprintf('****Building program structure****\n') ;
-
+fprintf('****Building program structure****\n');
+pltMods = [];
+if plotYes
+    fprintf(['Checking for ' LakeName '.plt file'])
+    pltFileName  = [Folder '/' LakeName '.plt'];
+    oper = fopen(pltFileName);
+    if eq(oper,-1)
+        fprintf('...not found\n\n')
+    else
+        pltMods = pltFileOpen(pltFileName);
+    end
+end
 [TT,outputOptions,writeTable,plotTable,dateInput,dateOutput,delimI,delimO] = ...
-    OutputConstructor(outPuts);
+    OutputConstructor(outPuts,pltMods);
 TT.useLvl = false;
 fNms = fieldnames(TT);
 for j = 1:length(fNms)

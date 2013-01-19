@@ -1,6 +1,6 @@
 function [truthTable,outputOptions,writeTable,plotTable,...
     dateInput,dateOutput,delimI,delimO] ...
-    = OutputConstructor(outputNames)
+    = OutputConstructor(outputNames,pltMods)
 
 outputOptions = {'St','uSt','Ln','W','wTemp','wndSpd','metaT',...
      'metaB','thermD','SthermD','SmetaB','SmetaT','SuSt','SLn','SW',...
@@ -24,21 +24,55 @@ dateOutput  = 'yyyy-mm-dd HH:MM';
 delimO = '\t';
 
 %% Figure defaults
-figure_width = 6;   %inches
-figure_height= 3;   %inches
-left_margin  = .75;  %inches
-rght_margin  = .1; %inches
-top_margin   = .4; %inches
-bot_margin   = .4;  %inches
+isStringMod = {'figUnits','figType','fontName','figRes'};
+figUnits    = 'inches';
+figWidth    = 6;   % relative to fig_units
+figHeight   = 3;   % relative to fig_units
+leftMargin  = .75; % relative to fig_units
+rightMargin = .1;  % relative to fig_units
+topMargin   = .4;  % relative to fig_units
+botMargin   = .4;  % relative to fig_units
+figType     = 'png';
+figRes      = '150'; % dots per inch (not relative to units?)
+fontName    = 'Arial';
+fontSize    = 12;
+heatMapMin  = 0;
+heatMapMax  = 30;
 
-fig_Defaults = struct('Units','inches','Color','w','PaperUnits','inches',...
-    'PaperPosition',[0 0 figure_width figure_height],...
-            'Position',[1 1 figure_width figure_height]);
-print_Defaults = struct('format','-dpng','res','-r150','toClose',true);
-axes_Defaults = struct('FontName','Arial','FontSize',12,'Layer','top',...
-    'Units','inches','Position',[left_margin bot_margin ...
-    figure_width-left_margin-rght_margin ...
-    figure_height-top_margin-bot_margin],...
+
+plt = struct('figUnits',figUnits,'figWidth',figWidth,'figHeight',figHeight,...
+    'leftMargin',leftMargin,'rightMargin',rightMargin,'topMargin',topMargin,...
+    'botMargin',botMargin,'figType',figType,'figRes',figRes,...
+    'fontName',fontName,'fontSize',fontSize,'heatMapMin',heatMapMin,...
+    'heatMapMax',heatMapMax);
+
+if ~isempty(pltMods)
+    % use plot mods to modify plotting defaults
+    fN = fieldnames(pltMods);
+    for n = 1:length(fN)
+        if ~any(strcmp(fN{n},isStringMod)) % test this
+            plt.(fN{n}) = str2double(pltMods.(fN{n}));
+        else
+            plt.(fN{n}) = pltMods.(fN{n});
+        end
+    end
+end
+
+
+fig_Defaults = struct('Units',plt.figUnits,'Color','w',...
+    'PaperUnits',plt.figUnits,...
+    'PaperPosition',[0 0 plt.figWidth plt.figHeight],...
+    'Position',[1 1 plt.figWidth plt.figHeight]);
+
+print_Defaults = struct('format',['-d' plt.figType],'res',['-r' plt.figRes],...
+    'toClose',true);
+
+position = [plt.leftMargin/plt.figWidth plt.botMargin/plt.figHeight ...
+    (plt.figWidth-plt.leftMargin-plt.rightMargin)/plt.figWidth ...
+    (plt.figHeight-plt.topMargin-plt.botMargin)/plt.figHeight];
+
+axes_Defaults = struct('FontName',plt.fontName,'FontSize',plt.fontSize,...
+    'Layer','top','Position',position,...
     'Box','on',...
     'YLabel','','Title','','YDir','normal','YScale','linear','CLim',[0 1]);
 %% build Structures
@@ -86,7 +120,7 @@ RunAxes.(char(name)) = struct('YLabel','Wedderburn Number (dim)',...
 name = 'wTemp';
 RunNeed.(char(name)) = {'openWtr','wrt_wTemp'};
 RunAxes.(char(name)) = struct('YLabel','Depth (m)','YDir','reverse',...
-    'Title','Water Temperature','Clim',[0 30]);
+    'Title','Water Temperature','Clim',[plt.heatMapMin plt.heatMapMax]);
 
 %% Wind Speed
 name = 'wndSpd';
