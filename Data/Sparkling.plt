@@ -1,0 +1,1 @@
+figWidth	8figRes	300heatMapMax	22fontName	Times New Roman
