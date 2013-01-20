@@ -46,7 +46,9 @@ if plotYes
     if eq(oper,-1)
         fprintf('...not found\n\n')
     else
+        
         pltMods = pltFileOpen(pltFileName);
+        fprintf('...completed\n');
     end
 end
 [TT,outputOptions,writeTable,plotTable,dateInput,dateOutput,delimI,delimO] = ...

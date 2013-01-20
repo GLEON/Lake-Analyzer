@@ -50,10 +50,18 @@ if ~isempty(pltMods)
     % use plot mods to modify plotting defaults
     fN = fieldnames(pltMods);
     for n = 1:length(fN)
-        if ~any(strcmp(fN{n},isStringMod)) % test this
-            plt.(fN{n}) = str2double(pltMods.(fN{n}));
+        if ~any(strcmp(fN{n},isStringMod))
+            if ne(str2double(pltMods.(fN{n})),plt.(fN{n}))
+                fprintf(['>>User plot modification; replacing ' fN{n} '=' ...
+                    num2str(plt.(fN{n})) ' with ' pltMods.(fN{n})  '<<<\n']);
+                plt.(fN{n}) = str2double(pltMods.(fN{n}));
+            end
         else
-            plt.(fN{n}) = pltMods.(fN{n});
+            if ~strcmp(pltMods.(fN{n}),plt.(fN{n}))
+                fprintf(['>>User plot modification; replacing ' fN{n} '=' ...
+                    plt.(fN{n}) ' with ' pltMods.(fN{n})  '<<<\n']);
+                plt.(fN{n}) = pltMods.(fN{n});
+            end
         end
     end
 end
