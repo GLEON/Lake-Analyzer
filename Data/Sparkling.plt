@@ -1,1 +1,1 @@
-figWidth	8figRes	300heatMapMax	22fontName	Times New Roman
+figWidth	8figRes	300heatMapMax	22figType	pdffontName	Times New Roman
