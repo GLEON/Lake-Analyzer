@@ -1,6 +1,6 @@
 Configuration file for Sparkling
 
-metaT		#outputs
+Ln, SmetaT, wTemp		#outputs
 86400		#output resolution (s)
 20		#total depth (m)
 2		#height from surface for wind measurement (m)
@@ -13,5 +13,5 @@ metaT		#outputs
 0		#min wind speed (m/s)   -inf if none
 0.05		#meta min slope (drho/dz per m)
 0.5		#mixed temp differential (°C)
-N		#plot figure (Y/N)
+Y		#plot figure (Y/N)
 Y		#write results to file (Y/N)
