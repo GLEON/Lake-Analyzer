@@ -22,8 +22,8 @@ function [dates,dat,headers] = gFileOpen(fileName)
         end
     end
     dat = NaN(length(dates),length(d)-1);
-    for j = 1:length(dates)
-        dat(l,1:length(d{j+1})) = d{j+1};
+    for i = 1:length(d)-1
+        dat(1:length(d{i+1}),i) = d{i+1};
     end
     
 end
