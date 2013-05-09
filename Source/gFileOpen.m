@@ -12,7 +12,6 @@ function [dates,dat,headers] = gFileOpen(fileName)
     fclose(fid);
     
     
-    dat = horzcat(d{2:end});
     try dates = datenum(d{1},'yyyy-mm-dd HH:MM');
         
     catch mssg
@@ -22,5 +21,9 @@ function [dates,dat,headers] = gFileOpen(fileName)
             dates(i) = datenum(char(d{1}(i)),'yyyy-mm-dd HH:MM');
         end
     end
-
+    dat = NaN(length(dates),length(d)-1);
+    for i = 1:length(d)-1
+        dat(1:length(d{i+1}),i) = d{i+1};
+    end
+    
 end
