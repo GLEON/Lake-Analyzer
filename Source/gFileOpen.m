@@ -8,7 +8,7 @@ function [dates,dat,headers] = gFileOpen(fileName)
         format = strcat(format,'%f');
     end
     d = textscan(fid,format,'delimiter','\t','treatAsEmpty',{'na','NA',...
-        '#VALUE!','#NAME?'});
+        '#VALUE!','#NAME?','NAN'});
     fclose(fid);
     
     
