@@ -41,11 +41,11 @@ fprintf('...completed\n\n') ;
 fprintf('****Building program structure****\n');
 pltMods = [];
 if plotYes
-    fprintf(['Checking for ' LakeName '.plt file'])
+    fprintf(['Checking for ' LakeName '.plt file*'])
     pltFileName  = [Folder '/' LakeName '.plt'];
     oper = fopen(pltFileName);
     if eq(oper,-1)
-        fprintf('...not found\n\n')
+        fprintf('...not found [*is optional]\n\n')
     else
         
         pltMods = pltFileOpen(pltFileName);
@@ -96,12 +96,12 @@ end
 if TT.openWtr
     % check for salinity file
     defHead = 'salinity';
-    fprintf(['Checking for ' LakeName '.sal file'])
+    fprintf(['Checking for ' LakeName '.sal file*'])
     salFileName  = [Folder '/' LakeName '.sal'];
     oper = fopen(salFileName);
     if eq(oper,-1)
         TT.useSal = false;      % salinity not used if file does exist
-        fprintf('...not found\n\n')
+        fprintf('...not found [*is optional]\n\n')
     else
         fprintf('...file found')
         fprintf(['\n' LakeName ...
@@ -163,12 +163,12 @@ if TT.openBth
     clear bathArray
     fprintf('...completed\n\n') ;
     % check for .lvl file here...
-    fprintf(['Checking for ' LakeName '.lvl file'])
+    fprintf(['Checking for ' LakeName '.lvl file*'])
     lvlFileName  = [Folder '/' LakeName '.lvl'];
     oper = fopen(lvlFileName);
     if eq(oper,-1)
         TT.useSal = false;      % salinity not used if file does exist
-        fprintf('...not found\n\n')
+        fprintf('...not found [*is optional]\n\n')
     else
         fprintf('...file found')
         fprintf(['\n' LakeName ...
@@ -577,7 +577,7 @@ end
 %
 %% *** schmidt stability ***
 if TT.StYes
-    fprintf('Calculating Scmidt Stability');
+    fprintf('Calculating Schmidt Stability');
     St = NaN(varL,1);
     for j = 1:varL
         wtrT = wtr(j,:);
