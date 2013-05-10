@@ -29,20 +29,21 @@ for j = 1:length(inD)-1;
         chk(j) = false;
     end
 end
+fgets(fID); % advance one line
 outPuts = outPuts(chk);
-inPuts = textscan(fID,'%f',12,'delimiter',',','commentStyle','#');
-outRs = inPuts{1,1}(1);
-maxZ  = inPuts{1,1}(2);
-wndH  = inPuts{1,1}(3);
-wndAv = inPuts{1,1}(4);
-lyrAv = inPuts{1,1}(5);
-outWn = inPuts{1,1}(6);
-wtrMx = inPuts{1,1}(7);
-wtrMn = inPuts{1,1}(8);
-wndMx = inPuts{1,1}(9);
-wndMn = inPuts{1,1}(10);
-drhDz = inPuts{1,1}(11);
-Tdiff = inPuts{1,1}(12);
+
+outRs = subString(fgets(fID));
+maxZ  = subString(fgets(fID));
+wndH  = subString(fgets(fID));
+wndAv = subString(fgets(fID));
+lyrAv = subString(fgets(fID));
+outWn = subString(fgets(fID));
+wtrMx = subString(fgets(fID));
+wtrMn = subString(fgets(fID));
+wndMx = subString(fgets(fID));
+wndMn = subString(fgets(fID));
+drhDz = subString(fgets(fID));
+Tdiff = subString(fgets(fID));
 plotRes = textscan(fID,'%s',2,'delimiter',',','commentStyle','#');
 fclose all;
 tempLine = char(plotRes{1,1}(1));
@@ -55,5 +56,14 @@ tempLine = char(plotRes{1,1}(2));
 if strcmpi(tempLine(1),'y')
     writeYes = true;
 end
-
-
+    % function for getting number for single line entry. Ignores spaces
+    function [valOut] = subString(stringIn)
+        val = regexp(stringIn,'#','split');
+        val = regexprep(regexprep(val{1},' ',''),'\t','');
+        if isempty(val)
+            valOut = NaN;
+        else
+            valOut = str2double(val);
+        end
+    end
+end
