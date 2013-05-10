@@ -577,7 +577,7 @@ end
 %
 %% *** schmidt stability ***
 if TT.StYes
-    fprintf('Calculating Scmidt Stability');
+    fprintf('Calculating Schmidt Stability');
     St = NaN(varL,1);
     for j = 1:varL
         wtrT = wtr(j,:);
