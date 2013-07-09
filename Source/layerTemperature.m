@@ -63,6 +63,7 @@ end
 
 %interpolates the bathymetry data
 layerD = top:dz:bottom;
+layerA  = interp1(bthD,bthA,layerD);
 layerT  = interp1(depths,wtr,layerD);
 
 
