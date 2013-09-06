@@ -34,7 +34,7 @@ end
 
 
 if isnan(metaTop_depth)
-    metaTop_depth = sortDepth(i);
+    metaTop_depth = min(depths);
 end
 if metaTop_depth > thermoD
     metaTop_depth = thermoD;
