@@ -33,7 +33,7 @@ if i-thermo_index > 1 && drho_dz(thermo_index) > slope
         sortDepth(thermo_index:i),slope);
 end
 if isnan(metaBot_depth)
-    metaBot_depth = depths(numDepths);
+    metaBot_depth = max(depths);
 end
     
 end
