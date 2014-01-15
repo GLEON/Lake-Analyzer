@@ -116,7 +116,7 @@ if TT.openWtr
             tempLen = length(tempStr);
             salDepths(i) = str2double(tempStr((length(defHead)+1:tempLen)));
         end
-        if any(isnan(depthAry))
+        if any(isnan(salDepths))
             error(['salinity headers are not in the right format'...
                 ' (e.g. ' defHead '0.5 for 0.5m measurement)']);
         end
