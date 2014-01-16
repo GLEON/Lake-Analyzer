@@ -103,6 +103,7 @@ if TT.openWtr
         TT.useSal = false;      % salinity not used if file does exist
         fprintf('...not found [*is optional]\n\n')
     else
+		% TT.useSal is default true
         fprintf('...file found')
         fprintf(['\n' LakeName ...
             ' salinity will be used for density calculations\n\n'])
@@ -167,7 +168,7 @@ if TT.openBth
     lvlFileName  = [Folder '/' LakeName '.lvl'];
     oper = fopen(lvlFileName);
     if eq(oper,-1)
-        TT.useSal = false;      % salinity not used if file does exist
+        TT.useLvl = false;      % level not used if file does exist
         fprintf('...not found [*is optional]\n\n')
     else
         fprintf('...file found')
