@@ -913,7 +913,7 @@ if TT.wrt_T1
         if lt(abs(wtr(j,1)-wtr(j,numDepths)),Tdiff)
             T1(j) = NaN;
         else
-            T1(j) = 2*L/(go*thermoD(j)*(Zm-thermoD(j))/Zm);
+            T1(j) = 2*L/sqrt((go*thermoD(j)*(Zm-thermoD(j))/Zm));
         end
         if lt(T1(j),0)
             T1(j) = 0;
@@ -958,7 +958,7 @@ if TT.wrt_ST1
         if lt(abs(wtr(j,1)-wtr(j,numDepths)),Tdiff)
             ST1(j) = NaN;
         else
-            ST1(j) = 2*L/(go*SthermoD(j)*(Zm-SthermoD(j))/Zm);
+            ST1(j) = 2*L/sqrt((go*SthermoD(j)*(Zm-SthermoD(j))/Zm));
         end
         if lt(ST1(j),0)
             ST1(j) = 0;
