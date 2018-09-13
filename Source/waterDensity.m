@@ -2,12 +2,12 @@ function [rho] = waterDensity(T,S)
 %% WDENSITY Density of water with supplied Temp and Salinity
 % rho = WDENSITY(Temperature, Salinity) is the density of water with the
 % given temperature and salinity
-% T is in 캜
+% T is in 째C
 % S is in Pratical Salinity Scale units (dimensionless)
 % T and S should be the same size, unless S is a scalar
 % rho is in grams/Liter
 %
-% <<<--- Effective range: 0-40캜, 0.5-43 Salinity --->>>
+% <<<--- Effective range: 0-40째C, 0.5-43 Salinity --->>>
 %
 %----Author: Jordan S Read 2011 ----
 % Editied by:
@@ -38,9 +38,9 @@ end
 %% use methods:
 if MM
     % <<equation provided by:
-    %같 Martin, J.L., McCutcheon, S.C., 1999. Hydrodynamics and Transport 같
-    %같 for Water Quality Modeling. Lewis Publications, Boca              같
-    %같 Raton, FL, 794pp.  >>
+    %째째 Martin, J.L., McCutcheon, S.C., 1999. Hydrodynamics and Transport 째째
+    %째째 for Water Quality Modeling. Lewis Publications, Boca              째째
+    %째째 Raton, FL, 794pp.  >>
     if ~eq(length(T),1)
         dens = @(T)(1000*(1-(T+288.9414)*(T-3.9863)^2/(508929.2*(T+68.12963))));
         rho  = arrayfun(dens,T);
@@ -49,9 +49,9 @@ if MM
     end
 elseif UN
     % <<equations provided by:
-    %같 Millero, F.J., Poisson, A., 1981. International one-atmosphere    같
-    %같 equation of state of seawater. UNESCO Technical Papers in Marine  같
-    %같 Science. No. 36     >>
+    %째째 Millero, F.J., Poisson, A., 1981. International one-atmosphere    째째
+    %째째 equation of state of seawater. UNESCO Technical Papers in Marine  째째
+    %째째 Science. No. 36     >>
     % --eqn (1):
     rho_0 = 999.842594+6.793952e-2*T-9.095290e-3*T.^2+...
         1.001685e-4*T.^3-1.120083e-6*T.^4+6.536335e-9*T.^5;
@@ -62,7 +62,7 @@ elseif UN
     % --eqn (4):
     C = 4.8314e-4;
     % --eqn (5):
-    rho = rho_0+A.*S+B.*S.^(3/2)+C.*S;
+    rho = rho_0+A.*S+B.*S.^(3/2)+C.*S.^2;
 else
     rho = T*NaN;
     for j = 1:length(T)
