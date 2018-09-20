@@ -1,4 +1,4 @@
-Lake Analyzer v3.3.3
+Lake Analyzer v3.4.0
 ====
 
 Lake Analyzer is a MATLAB code package for calculating physical indices of water column stability from temperature and (if applicable) wind measurements. 

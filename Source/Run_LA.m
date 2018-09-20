@@ -1,6 +1,6 @@
 function Run_LA( LakeName,Folder,skipLoad)
 %----Author: Jordan S Read 2009 ----
-%----version 3.3.1 2013-05-10 ------
+%----version 3.4.0 2018-09-20 ------
 
 if nargin < 3
     skipLoad = false;
